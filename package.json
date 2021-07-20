@@ -1,0 +1,30 @@
+{
+  "name": "portfoliov2",
+  "version": "1.0.0",
+  "description": "portfolio",
+  "author": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "app.js",
+  "dependencies": {
+    "@coreui/vue": "^3.2.11",
+    "corona-info": "^1.1.1",
+    "ejs": "^3.1.6",
+    "element-ui": "^2.15.3",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "mosha-vue-toastify": "^1.0.13",
+    "path": "^0.12.7",
+    "vue": "^2.6.14",
+    "vuetify": "^2.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-router": "~4.5.0",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "vue-cli-plugin-vuetify": "~2.4.1",
+    "vuetify-loader": "^1.7.0"
+  },
+  "license": "ISC"
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" type="text/css" href='src/assets/css/style.css'>
+    
+</head>
+<body>
+<div>
+    <h1 id='titre'v-if="seen">bienvenue sur mon portfolio</h1>
+</div>
+<div id='app'>
+  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color='#545c64' text-color='#FFF'>
+    <el-menu-item index="1">actualité</el-menu-item>
+    <el-submenu index="2">
+      <el-menu-item index="2-1">
+        <el-link type='danger' href='/covid' icon ='el-icon-warning'>covid</el-link>
+      </el-menu-item>
+        <el-menu-item index="2-2">
+          <el-link href='' icon="el-icon-edit">Veille technologique</el-link>
+        </el-menu-item>
+      
+    </el-submenu>
+    
+    <el-menu-item index="1">
+      <el-button type="text" @click="dialogVisible =true">Presentation</el-button>
+      <el-dialog title ='Presentation':visible.sync="dialogVisible">
+              <el-image :src="src" alt="image"></el-image>
+              <p v-for="contents in content">{{contents.name}}</p>
+             <p v-for="contents in content" style="font-family:Arial, Helvetica, sans-serif" id="presentation">{{contents.presentation}}</p>
+      </el-dialog>
+        
+    </el-menu-item>
+    <el-menu-item index="1"><el-link href="#projets">Projets</el-link></el-menu-item>
+    
+    
+</div>
+<div id="projets"style="text-align:center">
+  <h1>Mes projets</h1>
+  <div class="projects">
+    <form method="post">
+      add file:<input type="file"value="add project">
+    </form>
+  </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  
+  var app = new Vue({
+    el:"#app",
+    data(){
+      return{
+        dialogVisible:false,
+        src:'src/assets/images/profil.jpg',
+        content:[{
+          name:'aurelien',
+          presentation:"22 ans et passionné de nouvelles technologies, de developpement web et de jeux videos.J'ai obtenu mon BTS SIO option SLAM en juin 2021 et fais differents projets de developpement et toujours a jours concernant les actualités technologiques"
+        }],
+        
+      }
+    },
+    
+    
+  })
+       
+      
+    
+    
+       
+
+</script>
+
+</body>
+</html>
