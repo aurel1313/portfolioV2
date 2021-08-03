@@ -24,5 +24,24 @@ p#presentation{
   border:1px solid #409eff;
   height: 40vh;
 }
+h1{
+  text-align: center;
+}
+div#form{
+  display: flex;
+  justify-content: center;
+}
+.input-field label{
+  color:white
+}
+.input-field input[type=text]{
+  width:30vw;
+}
+.input-field input[type=email]{
+  width:30vw;
+}
+.input-field input[type=password]{
+  width:30vw;
+}
 
   

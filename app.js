@@ -10,9 +10,17 @@ const directory = path.join(__dirname,'src')
 app.use('/src',express.static(directory));
 app.set('views', path.join(__dirname, 'views')); 
 app.set('view engine', 'ejs');
-
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+var sql =require('mysql');
+var session = require('express-session')
 var data;
 var caseFrance,covidData,france;
+
+const validator=require('node-input-validator');
+const { Console } = require('console');
 app.get('/',(req,res)=>{
     //recuperer projets dans le dossier//
     console.log(__dirname)
@@ -25,9 +33,18 @@ app.get('/',(req,res)=>{
             })
         }
     })
+    var connexion =sql.createConnection({
+        host:'localhost',
+        user:'root',
+        password:'',
+        database:'portfoliov2'
+       
+    });
+    
     res.render('index');
 
 })
+
 app.get('/covid',(req,res)=>{
     covidData=async()=>{
          data =await covid.findData({ country: "all" });
@@ -40,6 +57,41 @@ app.get('/covid',(req,res)=>{
     covidData();
     france();
     res.render('covid',{data:data,france:caseFrance})
+    
+})
+
+app.get('/inscription',(req,res)=>{
+    res.render('inscription')
+})
+let error
+var user
+app.post('/inscription',function(req,res){
+    const v = new validator.Validator(req.body,{
+        pseudo:'required',
+        prenom:'required'
+    })
+      user =req.body.pseudonyme
+     
+     
+     
+    v.check().then((matched)=>{
+        if(!matched){
+             error = v.errors
+           
+        }
+        var connexion =sql.createConnection({
+            host:'localhost',
+            user:'root',
+            password:'',
+            database:'portfoliov2'
+           
+        });
+        connexion.connect(function(err){
+            if(err) throw err;
+            
+        })
+        res.render('inscription',{errors:error,pseudo:user})
+    })
     
 })
 app.listen(port, () => {

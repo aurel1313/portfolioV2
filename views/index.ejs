@@ -35,15 +35,17 @@
       </el-dialog>
         
     </el-menu-item>
-    <el-menu-item index="1"><el-link href="#projets">Projets</el-link></el-menu-item>
+<el-menu-item index="1"><el-link href="#projets">Projets</el-link></el-menu-item>
+<el-menu-item index="1"><el-link href='/inscription'>inscription Admin</el-link></el-menu-item>
     
     
 </div>
 <div id="projets"style="text-align:center">
   <h1>Mes projets</h1>
   <div class="projects">
-    <form method="post">
-      add file:<input type="file"value="add project">
+    <form method="post" enctype="multipart/form-data">
+      <label for="file">Selectionner fichier</label>
+      <input type="file" name="file"id="file">
     </form>
   </div>
 </div>

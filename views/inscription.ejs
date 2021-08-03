@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href='src/assets/css/style.css'>
+    <title>Inscription Admin</title>
+</head>
+<body>
+    <h1>Inscription Administrateur</h1>
+    <div id="form">
+        <form method="post" action="http://localhost:8080/inscription"  class="col s10">
+            <div class="input-field col s6">
+                <label for="prenom">entrez le prenom</label>
+                <input type="text"class="validate"id="prenom"name="prenom">
+            </div>
+            <div class ="input-field col s6">
+                <label for="nom">entrez votre nom</label>
+                <input type="text" class="validate"id="nom" name="nom">
+            </div>
+            <div class="input-field col s12">
+                <label for="pseudo">definir un pseudo</label>
+                <input type="text" id='pseudo'name='pseudonyme'class="validate"autocomplete="new-password"><br>
+            </div>
+            
+            <div class="input-field col s12">
+                <label for="email">adresse email:</label>
+                <input type="email" id="email" name="email" class="validate">
+            </div>
+            <div class="input-field col s12">
+                <label for="mdp">definir un mot de passe</label>
+                <input type="password"id="mdp" class="validate"autocomplete="new-password"name="mdp"><br>
+            </div>
+            
+                
+           
+
+            <input type="submit">
+            <div class ="red-text text-darken-2">
+               <% if(!pseudo){%>
+                   <%=errors.pseudo.message%>
+                <%}%>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</html>
