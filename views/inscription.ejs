@@ -5,13 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/vue2-animate/dist/vue2-animate.min.css"/>
     <link rel="stylesheet" type="text/css" href='src/assets/css/style.css'>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <title>Inscription Admin</title>
 </head>
 <body>
     <h1>Inscription Administrateur</h1>
     <div id="form">
-        <form method="post" action="http://localhost:8080/inscription"  class="col s10">
+        <form method="post" action="http://localhost:8080/inscription"  class="col s10" @submit="checkform" novalidate="true" id="app">
             <div class="input-field col s6">
                 <label for="prenom">entrez le prenom</label>
                 <input type="text"class="validate"id="prenom"name="prenom">
@@ -20,31 +22,109 @@
                 <label for="nom">entrez votre nom</label>
                 <input type="text" class="validate"id="nom" name="nom">
             </div>
-            <div class="input-field col s12">
-                <label for="pseudo">definir un pseudo</label>
-                <input type="text" id='pseudo'name='pseudonyme'class="validate"autocomplete="new-password"><br>
+            <div id="pseudonyme">
+                <div class="input-field col s12">
+                    <label for="pseudo">definir un pseudo</label>
+                    <input type="text" id='pseudo'name='pseudonyme'class="validate"autocomplete="new-password" v-model="message" v-on:keyup="countdown"><br>
+                    <span v-bind:class="{'red-text text-darken-2':hasError}">{{remaining}} caracteres restants</span>
+                </div>
             </div>
+           
             
             <div class="input-field col s12">
                 <label for="email">adresse email:</label>
                 <input type="email" id="email" name="email" class="validate">
             </div>
+            
+        
             <div class="input-field col s12">
                 <label for="mdp">definir un mot de passe</label>
                 <input type="password"id="mdp" class="validate"autocomplete="new-password"name="mdp"><br>
             </div>
             
-                
+            <v-calendar is-expanded></v-calendar>
+            <v-date-picker v-model='selectedDate' :value="null" color="red" is-dark is-range/>
            
 
-            <input type="submit">
-            <div class ="red-text text-darken-2">
-               <% if(!pseudo){%>
-                   <%=errors.pseudo.message%>
-                <%}%>
+            <input type="submit" name="soumettre">
+            <div class ="red-text text-darken-2" id="id" >
+              <p>
+                  <ul>
+                    <span class='new badge red' id="badge">{{count}}</span>
+                    <li v-for='error in errors'>{{error}}</li>
+                  </ul>
+              </p>
             </div>
         </form>
     </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src='https://unpkg.com/v-calendar'></script>
+<script>
+   
+    var errors
+    let count
+    document.getElementById("badge").style.display="none"
+    const app = new Vue({
+        el:"#app",
+        data:{
+            errors:[],
+            pseudonyme:null,
+            prenom:null,
+            soumettre:null,
+            message: "",
+            mdp: null,
+            maxCount:20,
+            remaining:20,
+            hasError:false,
+            selectedDate:null,
+            
+            
+            
+
+        },
+        methods:{
+            checkform:function(e){
+                console.log(this.mdp)
+                this.errors=[]
+                document.getElementById("badge").style.display="none"
+                if (!this.pseudonyme) {
+                     this.errors.push("le pseudo est requis");
+                     document.getElementById("badge").style.display="block"
+                }
+                if (!this.prenom) {
+                     this.errors.push("le prenom est requis");
+                     document.getElementById("badge").style.display="block"
+                }
+                if(!this.mdp){
+                    this.errors.push("password requis")
+                }
+                count =this.errors.length
+                
+                console.log(this.errors.length)
+                e.preventDefault()
+            },
+            countdown:function(e){
+                this.remaining=this.maxCount-this.message.length,
+                this.hasError =this.remaining < 1
+                if(this.hasError){
+                    //bloquer la saisie utilisateur//
+                     var size =document.getElementById('pseudo').size=19
+                    var length = document.getElementById('pseudo').maxLength=18
+                    console.log(length)
+                    
+                        
+                }
+            },
+           
+            
+            
+        }
+    })
+    
+    
+    
+   
+    
+</script>
 </html>

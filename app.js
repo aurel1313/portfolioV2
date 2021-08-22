@@ -63,14 +63,13 @@ app.get('/covid',(req,res)=>{
 app.get('/inscription',(req,res)=>{
     res.render('inscription')
 })
-let error
-var user
+
 app.post('/inscription',function(req,res){
     const v = new validator.Validator(req.body,{
         pseudo:'required',
         prenom:'required'
     })
-      user =req.body.pseudonyme
+      
      
      
      
@@ -79,7 +78,9 @@ app.post('/inscription',function(req,res){
              error = v.errors
            
         }
-        var connexion =sql.createConnection({
+         
+        
+        /*var connexion =sql.createConnection({
             host:'localhost',
             user:'root',
             password:'',
@@ -89,10 +90,10 @@ app.post('/inscription',function(req,res){
         connexion.connect(function(err){
             if(err) throw err;
             
-        })
-        res.render('inscription',{errors:error,pseudo:user})
+        })*/
+       
     })
-    
+    res.render('inscription')
 })
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
