@@ -36,7 +36,13 @@
         
     </el-menu-item>
 <el-menu-item index="1"><el-link href="#projets">Projets</el-link></el-menu-item>
+<el-menu-item index="1"><el-link href="/connexion">Connexion</el-link></el-menu-item>
 <el-menu-item index="1"><el-link href='/inscription'>inscription Admin</el-link></el-menu-item>
+<% if(sess.pseudo) { %>
+  <el-menu-item index="1"><el-link href="/deconnexion">Deconnexion</el-link></el-menu-item>
+  
+ <% } %> 
+
     
     
 </div>
